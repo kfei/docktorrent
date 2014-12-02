@@ -81,7 +81,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     unzip
 
 # IMPORTANT: Change the default login/password of ruTorrent before build
-RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd btbox p@ssw0rd
+RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd ducktorrent p@ssw0rd
 
 EXPOSE 80 9527 45566
 
