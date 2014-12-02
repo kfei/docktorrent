@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Change permission for ruTorrent's webserver user
+chown -R www-data:www-data /rtorrent
+chown -R www-data:www-data /usr/share/nginx/html/rutorrent
+
+# Start web server
+service nginx start
+php5-fpm
+
+# Turn to rTorrent
+exec rtorrent
