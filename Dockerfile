@@ -63,6 +63,7 @@ RUN build_deps="automake build-essential libc-ares-dev libcppunit-dev libtool"; 
 # Install required packages
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     apache2-utils \
+    libc-ares2 \
     nginx \
     php5-cli \
     php5-fpm
@@ -75,13 +76,12 @@ COPY bin/docktorrent /usr/local/bin/docktorrent
 
 # Install packages for ruTorrent plugins
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
-    libc-ares2 \
     mediainfo \
     unrar-free \
     unzip
 
 # IMPORTANT: Change the default login/password of ruTorrent before build
-RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd ducktorrent p@ssw0rd
+RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd docktorrent p@ssw0rd
 
 EXPOSE 80 9527 45566
 
