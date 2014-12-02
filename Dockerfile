@@ -71,7 +71,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 COPY config/nginx/default /etc/nginx/sites-available/default
 COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
 COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
-COPY btbox /usr/local/bin/btbox
+COPY bin/docktorrent /usr/local/bin/docktorrent
 
 # Install packages for ruTorrent plugins
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
@@ -89,4 +89,4 @@ VOLUME ["/rtorrent", "/usr/share/nginx/html/rutorrent/share"]
 
 WORKDIR /rtorrent
 
-ENTRYPOINT ["/usr/local/bin/btbox"]
+ENTRYPOINT ["/usr/local/bin/docktorrent"]
