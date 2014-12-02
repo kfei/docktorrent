@@ -1,52 +1,36 @@
-FROM ubuntu
+FROM debian:jessie
 
-MAINTAINER kfei "kfei@kfei.net"
+MAINTAINER kfei <kfei@kfei.net>
 
 ENV VER_LIBTORRENT 0.13.4
 ENV VER_RTORRENT 0.9.4
 ENV VER_RUTORRENT 3.6
 
-RUN apt-get update && apt-get install -q -y \
-    automake \
-    build-essential \
-    libc-ares-dev \
-    libcppunit-dev \
-    libtool \
-    libssl-dev \
-    libxml2-dev \
-    libncurses5-dev \
-    nginx \
-    php5-cli \
-    php5-fpm \
-    pkg-config \
-    subversion \
-    wget
-
 WORKDIR /usr/local/src
 
-# Install cURL
-RUN wget http://curl.haxx.se/download/curl-7.39.0.tar.gz && \
+# This long disgusting instruction saves your image ~130 MB
+RUN build_deps="automake build-essential libc-ares-dev libcppunit-dev libtool"; \
+    build_deps="${build_deps} libssl-dev libxml2-dev libncurses5-dev pkg-config subversion wget"; \
+    set -x && \
+    apt-get update && apt-get install -q -y --no-install-recommends ${build_deps} && \
+    wget http://curl.haxx.se/download/curl-7.39.0.tar.gz && \
     tar xzvfp curl-7.39.0.tar.gz && \
     cd curl-7.39.0 && \
-    ./configure --enable-ares --with-gnu-tls --enable-tls-srp --with-zlib --with-ssl && \
+    ./configure --enable-ares --enable-tls-srp --enable-gnu-tls --with-zlib --with-ssl && \
     make && \
     make install && \
     cd .. && \
     rm -rf curl-* && \
-    ldconfig
-
-# Install xmlrpc-c
-RUN svn checkout https://svn.code.sf.net/p/xmlrpc-c/code/stable/ xmlrpc-c && \
+    ldconfig && \
+    svn --trust-server-cert checkout https://svn.code.sf.net/p/xmlrpc-c/code/stable/ xmlrpc-c && \
     cd xmlrpc-c && \
     ./configure --enable-libxml2-backend --disable-abyss-server --disable-cgi-server && \
     make && \
     make install && \
     cd .. && \
     rm -rf xmlrpc-c && \
-    ldconfig
-
-# Install libTorrent
-RUN wget http://libtorrent.rakshasa.no/downloads/libtorrent-$VER_LIBTORRENT.tar.gz && \
+    ldconfig && \
+    wget http://libtorrent.rakshasa.no/downloads/libtorrent-$VER_LIBTORRENT.tar.gz && \
     tar xzf libtorrent-$VER_LIBTORRENT.tar.gz && \
     cd libtorrent-$VER_LIBTORRENT && \
     ./autogen.sh && \
@@ -55,32 +39,54 @@ RUN wget http://libtorrent.rakshasa.no/downloads/libtorrent-$VER_LIBTORRENT.tar.
     make install && \
     cd .. && \
     rm -rf libtorrent-* && \
-    ldconfig
-
-# Install rTorrent
-RUN wget http://libtorrent.rakshasa.no/downloads/rtorrent-$VER_RTORRENT.tar.gz && \
+    ldconfig && \
+    wget http://libtorrent.rakshasa.no/downloads/rtorrent-$VER_RTORRENT.tar.gz && \
     tar xzf rtorrent-$VER_RTORRENT.tar.gz && \
     cd rtorrent-$VER_RTORRENT && \
     ./autogen.sh && \
-    ./configure --with-xmlrpc-c && \
+    ./configure --with-xmlrpc-c --with-ncurses && \
     make && \
     make install && \
     cd .. && \
     rm -rf rtorrent-* && \
-    ldconfig
-
-WORKDIR /usr/share/nginx/html
-
-# Install ruTorrent
-RUN wget http://dl.bintray.com/novik65/generic/rutorrent-$VER_RUTORRENT.tar.gz && \
-    wget http://dl.bintray.com/novik65/generic/plugins-$VER_RUTORRENT.tar.gz && \
+    ldconfig && \
+    mkdir -p /usr/share/nginx/html && \
+    cd /usr/share/nginx/html && \
+    curl -L -O http://dl.bintray.com/novik65/generic/rutorrent-$VER_RUTORRENT.tar.gz && \
+    curl -L -O http://dl.bintray.com/novik65/generic/plugins-$VER_RUTORRENT.tar.gz && \
     tar xzvpf rutorrent-$VER_RUTORRENT.tar.gz && \
-    tar xzvpf plugins-$VER_RUTORRENT.tar.gz -C rutorrent/
+    tar xzvpf plugins-$VER_RUTORRENT.tar.gz -C rutorrent/ && \
+    rm -rf *.tar.gz && \
+    apt-get purge -y --auto-remove ${build_deps} && \
+    apt-get autoremove -y
 
-ADD config/nginx/default /etc/nginx/sites-available/default
-ADD config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
-ADD config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
+# Install required packages
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    apache2-utils \
+    nginx \
+    php5-cli \
+    php5-fpm
 
-EXPOSE 80 443 9527
+# Copy config files and a wrapper script
+COPY config/nginx/default /etc/nginx/sites-available/default
+COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
+COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
+COPY btbox /usr/local/bin/btbox
+
+# Install packages for ruTorrent plugins
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    libc-ares2 \
+    mediainfo \
+    unrar-free \
+    unzip
+
+# IMPORTANT: Change the default login/password of ruTorrent before build
+RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd btbox p@ssw0rd
+
+EXPOSE 80 9527 45566
 
 VOLUME ["/rtorrent", "/usr/share/nginx/html/rutorrent/share"]
+
+WORKDIR /rtorrent
+
+ENTRYPOINT ["/usr/local/bin/btbox"]
