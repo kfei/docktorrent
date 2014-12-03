@@ -11,7 +11,7 @@ Clone this repository and build the image yourself:
 ```bash
 git clone https://github.com/kfei/docktorrent
 cd docktorrent
-docker build -t docktorrent
+docker build -t docktorrent .
 ```
 
 On a slow machine, the building process may take some time. You can just pull
