@@ -4,9 +4,9 @@
 chown -R www-data:www-data /rtorrent
 chown -R www-data:www-data /usr/share/nginx/html/rutorrent
 
-# Start web server
+# Start satellite services
 service nginx start
-php5-fpm
+service php5-fpm start
 
 # Turn to rTorrent
 exec rtorrent

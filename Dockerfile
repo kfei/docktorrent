@@ -68,12 +68,6 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     php5-cli \
     php5-fpm
 
-# Copy config files and a wrapper script
-COPY config/nginx/default /etc/nginx/sites-available/default
-COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
-COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
-COPY bin/docktorrent /usr/local/bin/docktorrent
-
 # Install packages for ruTorrent plugins
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     mediainfo \
@@ -82,6 +76,12 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 
 # IMPORTANT: Change the default login/password of ruTorrent before build
 RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd docktorrent p@ssw0rd
+
+# Copy config files and a wrapper script
+COPY config/nginx/default /etc/nginx/sites-available/default
+COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
+COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
+COPY bin/* /usr/local/bin/
 
 EXPOSE 80 9527 45566
 
