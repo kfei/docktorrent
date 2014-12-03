@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Change permission for ruTorrent's webserver user
+# Create working directories if not exists
+mkdir -p /rtorrent/{downloads,watch,.session,rutorrent/user-profiles}
+
+# Change permission to ruTorrent's webserver user
 chown -R www-data:www-data /rtorrent
-chown -R www-data:www-data /usr/share/nginx/html/rutorrent
 
 # Start satellite services
 service nginx start

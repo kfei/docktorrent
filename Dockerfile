@@ -85,7 +85,7 @@ COPY bin/* /usr/local/bin/
 
 EXPOSE 80 9527 45566
 
-VOLUME ["/rtorrent", "/usr/share/nginx/html/rutorrent/share"]
+VOLUME ["/rtorrent"]
 
 WORKDIR /rtorrent
 
