@@ -83,10 +83,17 @@ COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
 COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
 COPY bin/* /usr/local/bin/
 
+# Add the s6 binaries fs layer
+ADD s6-1.1.3.2-musl-static.tar /
+
+# Service directories fs layer
+COPY rootfs /
+
+# Use s6 to supervise all services
+ENTRYPOINT ["/usr/bin/s6-svscan", "/etc/s6"]
+
 EXPOSE 80 9527 45566
 
 VOLUME ["/rtorrent"]
 
 WORKDIR /rtorrent
-
-ENTRYPOINT ["/usr/local/bin/docktorrent"]

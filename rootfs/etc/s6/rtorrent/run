@@ -6,9 +6,5 @@ mkdir -p /rtorrent/{downloads,watch,.session,rutorrent/user-profiles}
 # Change permission to ruTorrent's webserver user
 chown -R www-data:www-data /rtorrent
 
-# Start satellite services
-service nginx start
-service php5-fpm start
-
 # Turn to rTorrent
 exec rtorrent
