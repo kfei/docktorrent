@@ -81,7 +81,6 @@ RUN htpasswd -cb /usr/share/nginx/html/rutorrent/.htpasswd docktorrent p@ssw0rd
 COPY config/nginx/default /etc/nginx/sites-available/default
 COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
 COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
-COPY bin/* /usr/local/bin/
 
 # Add the s6 binaries fs layer
 ADD s6-1.1.3.2-musl-static.tar /
