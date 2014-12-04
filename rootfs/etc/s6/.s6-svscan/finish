@@ -1,3 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "[docktorrent] Shutting down..."
+echo
+echo "Shutting down..."
+
+# There must have a better way than sleep
+sleep 3
