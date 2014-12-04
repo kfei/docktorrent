@@ -6,5 +6,21 @@ mkdir -p /rtorrent/{downloads,watch,.session,rutorrent/user-profiles}
 # Change permission to ruTorrent's webserver user
 chown -R www-data:www-data /rtorrent
 
+# Checking the lock
+if [ -f /rtorrent/.session/rtorrent.lock ]; then
+    echo
+    prompt="The rTorrent session lock is detected, it can be a result of an \n"
+    prompt="${prompt}unexpected exit or other running rTorrent instance.\n"
+    echo -e ${prompt}
+    prompt="Remove lock and continue anyway? [y/N] "
+    read -r -p "${prompt}" response
+    response=${response,,}
+    if [[ $response =~ ^(yes|y)$ ]]; then
+        rm -f /rtorrent/.session/rtorrent.lock
+    else
+        s6-svscanctl -t /etc/s6
+    fi
+fi
+
 # Turn to rTorrent
 exec rtorrent
