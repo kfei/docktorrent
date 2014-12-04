@@ -5,6 +5,15 @@ Using [Docker](https://www.docker.com/),
 [ruTorrent](https://github.com/Novik/ruTorrent) to run a full-featured
 BitTorrent box.
 
+## Highlights
+
+  - Newest version of rTorrent and ruTorrent, with support of DHT and
+    asynchronous DNS which will result in a more responsive rTorrent.
+  - Enable all useful ruTorrent plugins by default.
+  - All-in-one Docker container, build once and run everywhere.
+  - With a working configuration by default, give it a quick try and tune the
+    configs later.
+
 ## Quick Start
 
 Clone this repository and build the image yourself:
