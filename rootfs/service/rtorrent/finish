@@ -2,5 +2,5 @@
 
 echo
 echo "rTorrent exited."
-s6-svscanctl -t /etc/s6
+s6-svscanctl -t /service
 sleep 3

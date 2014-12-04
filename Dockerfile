@@ -89,7 +89,7 @@ ADD s6-1.1.3.2-musl-static.tar /
 COPY rootfs /
 
 # Use s6 to supervise all services
-ENTRYPOINT ["/usr/bin/s6-svscan", "/etc/s6"]
+ENTRYPOINT ["/usr/bin/s6-svscan", "/service"]
 
 EXPOSE 80 9527 45566
 

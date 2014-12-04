@@ -18,7 +18,7 @@ if [ -f /rtorrent/.session/rtorrent.lock ]; then
     if [[ $response =~ ^(yes|y)$ ]]; then
         rm -f /rtorrent/.session/rtorrent.lock
     else
-        s6-svscanctl -t /etc/s6
+        s6-svscanctl -t /service
     fi
 fi
 
