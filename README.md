@@ -11,6 +11,7 @@ BitTorrent box.
     asynchronous DNS which will result in a more responsive rTorrent.
   - Enable all useful ruTorrent plugins by default.
   - All-in-one Docker container, build once and run everywhere.
+  - rTorrent will automatic restarts on crash.
   - With a working configuration by default, give it a quick try and tune the
     configs later.
 
@@ -45,6 +46,12 @@ If the container starts without errors, visit `http://127.0.0.1` through any web
 browser, log in to with the default account: `docktorrent/p@ssw0rd`.
 
 Happy seeding!
+
+## Requirement
+
+All you need is to have Docker installed on your system. Check [Docker
+Documentation](https://docs.docker.com/installation/) for installation guide on
+your OS platform.
 
 ## Screenshots
 
