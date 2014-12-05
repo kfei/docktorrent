@@ -2,5 +2,6 @@
 
 echo
 echo "rTorrent exited."
+
+# Send SIGTERM to all remaining services
 s6-svscanctl -t /service
-sleep 3

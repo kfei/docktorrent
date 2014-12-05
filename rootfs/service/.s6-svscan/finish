@@ -3,5 +3,6 @@
 echo
 echo "Shutting down..."
 
-# There must have a better way than sleep
-sleep 3
+# Kind of workaround...
+touch /etc/leapsecs.dat
+exec s6-svwait -d /service/rtorrent
