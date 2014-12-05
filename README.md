@@ -34,13 +34,19 @@ Now run the docktorrent container:
 ```bash
 docker run -it \
     -p 80:80 -p 45566:45566 -p 9527:9527/udp \
+    --dns 8.8.8.8 \
     -v /data-store:/rtorrent \
     docktorrent
 ```
-Note that the exposed ports are required for ruTorrent web interface, rTorrent
-listening and the DHT protocol according to your `.rtorrent.rc`. The
-`/data-store` volume is for all downloads, torrents and session data, just make
-sure the disk space is enough.
+Note that:
+  - The exposed ports are required for ruTorrent web interface, rTorrent
+    listening and the DHT protocol according to your `.rtorrent.rc`.
+  - The `--dns 8.8.8.8` argument is optional but recommended. It seems like the
+    current version of rTorrent still has some [DNS
+    issues](https://github.com/rakshasa/rtorrent/issues/180), using Google's
+    DNS may help.
+  - The `/data-store` volume is for all downloads, torrents and session data,
+    just make sure the disk space is enough.
 
 If the container starts without errors, visit `http://127.0.0.1` through any web
 browser, log in to with the default account: `docktorrent/p@ssw0rd`.
