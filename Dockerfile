@@ -83,7 +83,7 @@ COPY config/rtorrent/.rtorrent.rc /root/.rtorrent.rc
 COPY config/rutorrent/config.php /usr/share/nginx/html/rutorrent/conf/config.php
 
 # Add the s6 binaries fs layer
-ADD s6-1.1.3.2-musl-static.tar /
+ADD s6-1.1.3.2-musl-static.tar.xz /
 
 # Service directories fs layer
 COPY rootfs /

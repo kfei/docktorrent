@@ -24,8 +24,8 @@ cd docktorrent
 docker build -t docktorrent .
 ```
 
-On a slow machine, the building process may take some time. You can just pull
-a pre-built image:
+The building process may take some time. You can just pull the latest image
+from mine:
 ```bash
 docker pull kfei/docktorrent
 ```
@@ -55,8 +55,8 @@ Happy seeding!
 
 ## Requirement
 
-All you need is to have Docker installed on your system. Check [Docker
-Documentation](https://docs.docker.com/installation/) for installation guide on
+All you need is to have Docker installed on your system. Check Docker
+[Documentation](https://docs.docker.com/installation/) for installation guide on
 your OS platform.
 
 ## Screenshots
