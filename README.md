@@ -11,9 +11,9 @@ BitTorrent box.
   - Newest version of rTorrent and ruTorrent, with support of DHT and
     asynchronous DNS which will result in a more responsive rTorrent.
   - Enable all useful ruTorrent plugins by default.
-  - rTorrent will automatic restarts on crash.
-  - With a working configuration by default, give it a quick try and tune the
-    configs later.
+  - Get a working BitTorrent box in less than 3 minutes, give it a quick try
+    and tune the configs later.
+  - rTorrent will automatically restarts on crash.
   - No more boring installation, also keep your OS in a clean state.
 
 ## Quick Start
