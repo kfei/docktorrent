@@ -7,13 +7,14 @@ BitTorrent box.
 
 ## Highlights
 
+  - All-in-one Docker container, build once and run everywhere.
   - Newest version of rTorrent and ruTorrent, with support of DHT and
     asynchronous DNS which will result in a more responsive rTorrent.
   - Enable all useful ruTorrent plugins by default.
-  - All-in-one Docker container, build once and run everywhere.
   - rTorrent will automatic restarts on crash.
   - With a working configuration by default, give it a quick try and tune the
     configs later.
+  - No more boring installation, also keep your OS in a clean state.
 
 ## Quick Start
 
