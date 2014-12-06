@@ -63,3 +63,7 @@ your OS platform.
 ## Screenshots
 
 ![IMAGE](http://i.imgur.com/CHHYIRR.png)
+
+![IMAGE](http://i.imgur.com/pwYs20g.png)
+
+![IMAGE](http://i.imgur.com/3hOaxFo.png)
