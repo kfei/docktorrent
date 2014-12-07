@@ -60,6 +60,11 @@ All you need is to have Docker installed on your system. Check Docker
 [Documentation](https://docs.docker.com/installation/) for installation guide on
 your OS platform.
 
+## Feedback
+
+Bug reports and feature suggestions are both welcome, feel free to create
+issues on [issue tracker](https://github.com/kfei/docktorrent/issues).
+
 ## Screenshots
 
 ![IMAGE](http://i.imgur.com/CHHYIRR.png)
