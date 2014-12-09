@@ -18,7 +18,7 @@ BitTorrent box.
 
 ## Quick Start
 
-Clone this repository and build the image yourself:
+Clone this repository and build the image locally:
 ```bash
 git clone https://github.com/kfei/docktorrent
 cd docktorrent
@@ -31,7 +31,7 @@ from mine:
 docker pull kfei/docktorrent
 ```
 
-Now run the docktorrent container:
+After the image is built or pulled, run the docktorrent container:
 ```bash
 docker run -it \
     -p 80:80 -p 45566:45566 -p 9527:9527/udp \
@@ -41,7 +41,7 @@ docker run -it \
 ```
 Note that:
   - The exposed ports are required for ruTorrent web interface, rTorrent
-    listening and the DHT protocol according to your `.rtorrent.rc`.
+    listening and the DHT protocol according to the default `.rtorrent.rc`.
   - The `--dns 8.8.8.8` argument is optional but recommended. It seems like the
     current version of rTorrent still has some [DNS
     issues](https://github.com/rakshasa/rtorrent/issues/180), using Google's
@@ -62,8 +62,8 @@ your OS platform.
 
 ## Feedback
 
-Bug reports and feature suggestions are both welcome, feel free to create
-issues on [issue tracker](https://github.com/kfei/docktorrent/issues).
+Bug reports and feature suggestions are both welcome. Feel free to use the
+[issue tracker](https://github.com/kfei/docktorrent/issues).
 
 ## Screenshots
 
