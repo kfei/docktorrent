@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Create working directories if not exists
+mkdir -p /rtorrent/{downloads,watch,.session,rutorrent/user-profiles}
+
+# Change permission to ruTorrent's webserver user
+chown -R www-data:www-data /rtorrent
+
+# Turn off all logs
+[ "${DKT_LOGS_OFF}" = "y" ] && {
+    sed -i '/^log./d' /root/.rtorrent.rc
+    sed -i 's/\/var\/log\/nginx\/access.log;/\/dev\/null;/g' /etc/nginx/nginx.conf
+    sed -i 's/\/var\/log\/nginx\/error.log;/\/dev\/null crit;/g' /etc/nginx/nginx.conf
+    sed -i 's/^error_log = .*log/error_log = \/dev\/null/g' /etc/php5/fpm/php-fpm.conf
+}
+
+# Use s6 to supervise all services
+exec /usr/bin/s6-svscan /service
