@@ -6,8 +6,34 @@ mkdir -p /rtorrent/{downloads,watch,.session,rutorrent/user-profiles}
 # Change permission to ruTorrent's webserver user
 chown -R www-data:www-data /rtorrent
 
+# Override rTorrent settings
+[ "${IP}" ] && {
+    sed -i '/^ip =/d' /root/.rtorrent.rc
+    echo "ip = ${IP}" >> /root/.rtorrent.rc
+}
+[ "${MAX_PEERS}" ] && {
+    sed -i '/^max_peers =/d' /root/.rtorrent.rc
+    echo "max_peers = ${MAX_PEERS}" >> /root/.rtorrent.rc
+}
+[ "${MAX_PEERS_SEED}" ] && {
+    sed -i '/^max_peers_seed =/d' /root/.rtorrent.rc
+    echo "max_peers_seed = ${MAX_PEERS_SEED}" >> /root/.rtorrent.rc
+}
+[ "${MAX_UPLOADS}" ] && {
+    sed -i '/^max_uploads =/d' /root/.rtorrent.rc
+    echo "max_uploads = ${MAX_UPLOADS}" >> /root/.rtorrent.rc
+}
+[ "${DOWNLOAD_RATE}" ] && {
+    sed -i '/^download_rate =/d' /root/.rtorrent.rc
+    echo "download_rate = ${DOWNLOAD_RATE}" >> /root/.rtorrent.rc
+}
+[ "${UPLOAD_RATE}" ] && {
+    sed -i '/^upload_rate =/d' /root/.rtorrent.rc
+    echo "upload_rate = ${UPLOAD_RATE}" >> /root/.rtorrent.rc
+}
+
 # Turn off all logs
-[ "${DKT_LOGS_OFF}" = "y" ] && {
+[ "${LOGS_OFF}" = "yes" ] && {
     sed -i '/^log./d' /root/.rtorrent.rc
     sed -i 's/\/var\/log\/nginx\/access.log;/\/dev\/null;/g' /etc/nginx/nginx.conf
     sed -i 's/\/var\/log\/nginx\/error.log;/\/dev\/null crit;/g' /etc/nginx/nginx.conf
