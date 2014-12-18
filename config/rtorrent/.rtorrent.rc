@@ -95,5 +95,5 @@ schedule = chmod,0,0,"execute=chmod,777,/tmp/rpc.socket"
 encoding_list = UTF-8
 
 # Log to file
-# log.open_file = "rtorrent", /var/log/rtorrent.log
-# log.add_output = "debug", "rtorrent"
+log.open_file = "rtorrent", /var/log/rtorrent.log
+log.add_output = "debug", "rtorrent"
