@@ -103,3 +103,6 @@ EXPOSE 80 9527 45566
 
 # Declare volumes
 VOLUME ["/rtorrent", "/var/log"]
+
+# This should be removed in the latest version of Docker
+ENV HOME /root

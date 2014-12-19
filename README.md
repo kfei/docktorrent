@@ -31,7 +31,7 @@ from mine:
 docker pull kfei/docktorrent
 ```
 
-After the image is built or pulled, run the docktorrent container:
+After the image is built or pulled, run the docktorrent container, for example:
 ```bash
 docker run -it \
     -p 80:80 -p 45566:45566 -p 9527:9527/udp \
