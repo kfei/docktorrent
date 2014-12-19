@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Create working directories if not exists
 mkdir -p /rtorrent/{downloads,watch,.session,rutorrent/user-profiles}
