@@ -41,4 +41,4 @@ chown -R www-data:www-data /rtorrent
 }
 
 # Use s6 to supervise all services
-exec /usr/bin/s6-svscan /service
+exec /usr/bin/s6-svscan -t0 /service
