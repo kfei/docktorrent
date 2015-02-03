@@ -4,12 +4,11 @@ MAINTAINER kfei <kfei@kfei.net>
 
 ENV VER_LIBTORRENT 0.13.4
 ENV VER_RTORRENT 0.9.4
-ENV VER_RUTORRENT 3.6
 
 WORKDIR /usr/local/src
 
 # This long disgusting instruction saves your image ~130 MB
-RUN build_deps="automake build-essential libc-ares-dev libcppunit-dev libtool"; \
+RUN build_deps="automake build-essential ca-certificates libc-ares-dev libcppunit-dev libtool"; \
     build_deps="${build_deps} libssl-dev libxml2-dev libncurses5-dev pkg-config subversion wget"; \
     set -x && \
     apt-get update && apt-get install -q -y --no-install-recommends ${build_deps} && \
@@ -52,10 +51,9 @@ RUN build_deps="automake build-essential libc-ares-dev libcppunit-dev libtool"; 
     ldconfig && \
     mkdir -p /usr/share/nginx/html && \
     cd /usr/share/nginx/html && \
-    curl -L -O http://dl.bintray.com/novik65/generic/rutorrent-$VER_RUTORRENT.tar.gz && \
-    curl -L -O http://dl.bintray.com/novik65/generic/plugins-$VER_RUTORRENT.tar.gz && \
-    tar xzvpf rutorrent-$VER_RUTORRENT.tar.gz && \
-    tar xzvpf plugins-$VER_RUTORRENT.tar.gz -C rutorrent/ && \
+    mkdir rutorrent && \
+    curl -L -O https://github.com/Novik/ruTorrent/archive/master.tar.gz && \
+    tar xzvf master.tar.gz -C rutorrent --strip-components 1 && \
     rm -rf *.tar.gz && \
     apt-get purge -y --auto-remove ${build_deps} && \
     apt-get autoremove -y
