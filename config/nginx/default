@@ -6,10 +6,17 @@ server {
 
 	server_name "docktorrent";
 
-	location / {
-		auth_basic "Login Required";
-		auth_basic_user_file /usr/share/nginx/html/rutorrent/.htpasswd;
+	auth_basic "Login Required";
+	auth_basic_user_file /usr/share/nginx/html/rutorrent/.htpasswd;
 
+	location /RPC2 {
+		include scgi_params;
+		scgi_send_timeout 10s;
+		scgi_read_timeout 10s;
+		scgi_pass  unix:/tmp/rpc.socket;
+	}
+
+	location / {
 		try_files $uri $uri/ /index.html;
 	}
 
