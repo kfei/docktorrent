@@ -1,0 +1,32 @@
+#!/bin/bash
+################################################
+# rtorrent-healthcheck                         #
+# Monitor rtorrent and restart it if it hangs. #
+################################################
+
+# Interval, in seconds
+interval=30;
+
+# End of configuration
+
+while true
+do
+    # We sleep first to avoid any race when starting for the first time.
+    sleep $interval;
+
+    # Capture the HTTP status code when we send an XML request. If the API is
+    # available, we should get a 200 OK. When it's not, we generally get a
+    # Gateway Timeout from Nginx - but we aren't specifically looking for that.
+    status_code=$(
+      curl --silent \
+           --data '<ping></ping>' \
+           --write-out '%{http_code}' \
+           --output /dev/null \
+           http://localhost/RPC2 \
+    )
+    if [ "$status_code" != "200" ]
+    then
+            s6-svc -k /service/rtorrent;
+    fi
+done
+

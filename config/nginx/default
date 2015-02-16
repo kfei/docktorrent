@@ -6,6 +6,10 @@ server {
 
 	server_name "docktorrent";
 
+	# Only localhost is allowed to access resources unauthenticated.
+	satisfy any;
+	allow 127.0.0.1;
+	deny all;
 	auth_basic "Login Required";
 	auth_basic_user_file /usr/share/nginx/html/rutorrent/.htpasswd;
 
