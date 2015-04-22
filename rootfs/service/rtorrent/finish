@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo
-echo "rTorrent exited."
-
-# Send SIGTERM to all remaining services
-s6-svscanctl -t /service
+# Send SIGTERM to all remaining services if it's a `docker stop`
+[ -e /tmp/is-docker-stop ] && {
+    rm -f /tmp/is-docker-stop
+    s6-svscanctl -t /service
+}

@@ -13,7 +13,7 @@ BitTorrent box.
   - Enable all useful ruTorrent plugins by default.
   - Get a working BitTorrent box in less than 3 minutes, give it a quick try
     and tune the configs later.
-  - rTorrent will automatically restarts on crash.
+  - rTorrent will automatically restarts on crash or freeze.
   - No more boring installation, also keep your OS in a clean state.
 
 ## Quick Start
@@ -77,6 +77,11 @@ Override settings in `.rtorrent.rc`:
 All you need is to have Docker installed on your system. Check Docker
 [Documentation](https://docs.docker.com/installation/) for installation guide on
 your OS platform.
+
+## Tips
+
+  - `docker stop` can gracefully shutdown rTorrent if you give it more time by
+`docker stop -t 120` (which means 120 seconds to time out).
 
 ## Feedback
 

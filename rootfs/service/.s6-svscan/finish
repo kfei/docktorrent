@@ -3,6 +3,10 @@
 echo
 echo "Shutting down..."
 
+# Tell rTorrent this is a `docker stop`,
+# which means it does not have to auto restart
+touch /tmp/is-docker-stop
+
 # Kind of workaround...
 touch /etc/leapsecs.dat
 exec s6-svwait -d /service/rtorrent

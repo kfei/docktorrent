@@ -22,10 +22,12 @@ do
            --data '<ping></ping>' \
            --write-out '%{http_code}' \
            --output /dev/null \
+           --retry 3 \
            http://localhost/RPC2 \
     )
     if [ "$status_code" != "200" ]
     then
+            rm -f /rtorrent/.session/rtorrent.lock;
             s6-svc -k /service/rtorrent;
     fi
 done
