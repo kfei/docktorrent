@@ -93,6 +93,10 @@ ADD s6-1.1.3.2-musl-static.tar.xz /
 # Service directories and the wrapper script
 COPY rootfs /
 
+# Symlink the healthcheck.
+RUN ln -s /usr/local/bin/rtorrent-healthcheck /service/rtorrent-healthcheck/run
+RUN ln -s /bin/true /service/rtorrent-healthcheck/finish
+
 # Run the wrapper script first
 ENTRYPOINT ["/usr/local/bin/docktorrent"]
 
