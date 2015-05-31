@@ -29,7 +29,7 @@ RUN build_deps="automake build-essential ca-certificates libc-ares-dev libcppuni
     cd .. && \
     rm -rf xmlrpc-c && \
     ldconfig && \
-    wget http://libtorrent.rakshasa.no/downloads/libtorrent-$VER_LIBTORRENT.tar.gz && \
+    wget -O libtorrent-$VER_LIBTORRENT.tar.gz https://github.com/rakshasa/libtorrent/archive/$VER_LIBTORRENT.tar.gz && \
     tar xzf libtorrent-$VER_LIBTORRENT.tar.gz && \
     cd libtorrent-$VER_LIBTORRENT && \
     ./autogen.sh && \
@@ -39,7 +39,7 @@ RUN build_deps="automake build-essential ca-certificates libc-ares-dev libcppuni
     cd .. && \
     rm -rf libtorrent-* && \
     ldconfig && \
-    wget http://libtorrent.rakshasa.no/downloads/rtorrent-$VER_RTORRENT.tar.gz && \
+    wget -O rtorrent-$VER_RTORRENT.tar.gz https://github.com/rakshasa/rtorrent/archive/$VER_RTORRENT.tar.gz && \
     tar xzf rtorrent-$VER_RTORRENT.tar.gz && \
     cd rtorrent-$VER_RTORRENT && \
     ./autogen.sh && \
