@@ -33,11 +33,16 @@ chown -R www-data:www-data /rtorrent
 }
 
 # Turn off all logs
-[ "${LOGS_OFF}" = "yes" ] && {
+[ "${LOGS_OFF}" == "yes" ] || [ "${LOGS_OFF}" == "y" ] && {
     sed -i '/^log./d' /root/.rtorrent.rc
     sed -i 's/\/var\/log\/nginx\/access.log;/\/dev\/null;/g' /etc/nginx/nginx.conf
     sed -i 's/\/var\/log\/nginx\/error.log;/\/dev\/null crit;/g' /etc/nginx/nginx.conf
     sed -i 's/^error_log = .*log/error_log = \/dev\/null/g' /etc/php5/fpm/php-fpm.conf
+}
+
+# Turn off authentication
+[ "${AUTH_OFF}" ] && {
+    sed -i '/allow 127.0.0.1/a allow '${AUTH_OFF}';' /etc/nginx/sites-enabled/default
 }
 
 # Use s6 to supervise all services

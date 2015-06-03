@@ -6,7 +6,8 @@ server {
 
 	server_name "docktorrent";
 
-	# Only localhost is allowed to access resources unauthenticated.
+	# Only localhost and networks passed by `-e AUTH_OFF` are allowed to access
+	# resources unauthenticated.
 	satisfy any;
 	allow 127.0.0.1;
 	deny all;
