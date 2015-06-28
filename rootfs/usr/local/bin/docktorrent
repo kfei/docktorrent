@@ -32,8 +32,8 @@ chown -R www-data:www-data /rtorrent
     echo "upload_rate = ${UPLOAD_RATE}" >> /root/.rtorrent.rc
 }
 [ "${DOWNLOAD_DIR}" ] && {
-    sed -i '/^download =/d' /root/.rtorrent.rc
-    echo "download = ${DOWNLOAD_DIR}" >> /root/.rtorrent.rc
+    sed -i '/^directory =/d' /root/.rtorrent.rc
+    echo "directory = ${DOWNLOAD_DIR}" >> /root/.rtorrent.rc
 }
 
 # Turn off all logs
