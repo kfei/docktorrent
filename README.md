@@ -53,7 +53,7 @@ Note that:
     available [runtime configs](#runtime-configs).
 
 If the container starts without errors, visit `http://127.0.0.1` through any web
-browser, log in to with the default account: `docktorrent/p@ssw0rd`.
+browser, log in to with the default username/password: `docktorrent/p@ssw0rd`.
 
 Happy seeding!
 
@@ -64,7 +64,7 @@ There are some environment variables can be supplied at run time:
     and other services so that you don't have to worry about space for
     `/var/log`. Default is not set.
   - **AUTH_OFF**: Disable HTTP authentication on certain network. E.g.,
-    `192.168.1.0/24`.
+    `192.168.1.0/24` or `all`.
 
 Override settings in `.rtorrent.rc`:
   - **IP** overrides `ip`.
