@@ -7,6 +7,23 @@ ENV VER_RTORRENT 0.9.4
 
 WORKDIR /usr/local/src
 
+# Filebot
+RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y oracle-java8-installer wget
+RUN wget -O filebot.deb 'https://app.filebot.net/download.php?type=deb&arch=amd64'
+RUN dpkg -i filebot.deb
+RUN dpkg-reconfigure locales
+RUN rm filebot.deb
+
+# In case your movies/series have accents in their titles, utf-8 needed
+RUN locale-gen --purge en_US.UTF-8
+RUN echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
+
 # This long disgusting instruction saves your image ~130 MB
 RUN build_deps="automake build-essential ca-certificates libc-ares-dev libcppunit-dev libtool"; \
     build_deps="${build_deps} libssl-dev libxml2-dev libncurses5-dev pkg-config subversion wget"; \
