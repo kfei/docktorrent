@@ -38,7 +38,7 @@ docker run -it \
     --dns 8.8.8.8 \
     -v /data-store:/rtorrent \
     -e UPLOAD_RATE=1024 \
-    docktorrent
+    kfei/docktorrent
 ```
 Note that:
   - The exposed ports are required for ruTorrent web interface, rTorrent
