@@ -9,7 +9,7 @@ BitTorrent box.
 
   - All-in-one Docker container, build once and run everywhere.
   - Newest version of rTorrent and ruTorrent, with support of DHT and
-    asynchronous DNS which will result in a more responsive rTorrent.
+    asynchronous DNS which will results in a more responsive rTorrent.
   - Enable all useful ruTorrent plugins by default.
   - Get a working BitTorrent box in less than 3 minutes, give it a quick try
     and tune the configs later.
@@ -26,7 +26,7 @@ docker build -t docktorrent .
 ```
 
 The building process may take some time. You can just pull the latest image
-from mine:
+from Docker Hub:
 ```bash
 docker pull kfei/docktorrent
 ```
@@ -38,7 +38,7 @@ docker run -it \
     --dns 8.8.8.8 \
     -v /data-store:/rtorrent \
     -e UPLOAD_RATE=1024 \
-    kfei/docktorrent
+    kfei/docktorrent    # Or just `docktorrent` for locally built image
 ```
 Note that:
   - The exposed ports are required for ruTorrent web interface, rTorrent
