@@ -1,3 +1,7 @@
+![Docker pulls](https://img.shields.io/docker/pulls/kfei/docktorrent.svg)
+![Docker stars](https://img.shields.io/docker/stars/kfei/docktorrent.svg)
+![Docker image status](https://badge.imagelayers.io/kfei/docktorrent:latest.svg)
+
 # docktorrent
 
 Using [Docker](https://www.docker.com/),
