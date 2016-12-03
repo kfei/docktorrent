@@ -45,5 +45,9 @@ chown -R www-data:www-data /rtorrent
     sed -i '/allow 127.0.0.1/a allow '${AUTH_OFF}';' /etc/nginx/sites-enabled/default
 }
 
+# Symlink TV/Anime/Movies
+grep "rtorrent-postprocess" /root/.rtorrent.rc \
+    || echo 'system.method.set_key=event.download.finished,filebot_amc,"execute={/usr/local/bin/rtorrent-postprocess,$d.get_base_path=,$d.get_name=,$d.get_custom1=}"' >> /root/.rtorrent.rc
+
 # Use s6 to supervise all services
 exec /usr/bin/s6-svscan -t0 /service

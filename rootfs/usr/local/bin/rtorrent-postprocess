@@ -1,0 +1,7 @@
+#!/bin/bash
+TORRENT_PATH=$1
+TORRENT_NAME=$2
+TORRENT_LABEL=$3
+
+mkdir -p /rtorrent/sorted && cd /rtorrent/sorted || exit 1
+filebot -script fn:amc --output . --log-file amc.log --action symlink --conflict override -non-strict --def music=y artwork=y "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=$TORRENT_LABEL" &
