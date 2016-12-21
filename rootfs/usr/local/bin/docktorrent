@@ -31,6 +31,10 @@ chown -R www-data:www-data /rtorrent
     sed -i '/^upload_rate =/d' /root/.rtorrent.rc
     echo "upload_rate = ${UPLOAD_RATE}" >> /root/.rtorrent.rc
 }
+[ "${PORT_RANGE}" ] && {
+    sed -i '/^port_range =/d' /root/.rtorrent.rc
+    echo "port_range = ${PORT_RANGE}" >> /root/.rtorrent.rc
+}
 
 # Turn off all logs
 [ "${LOGS_OFF}" == "yes" ] || [ "${LOGS_OFF}" == "y" ] && {

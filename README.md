@@ -77,6 +77,7 @@ Override settings in `.rtorrent.rc`:
   - **MAX_UPLOADS** overrides `max_uploads`.
   - **DOWNLOAD_RATE** overrides `download_rate`.
   - **UPLOAD_RATE** overrides `upload_rate`.
+  - **PORT_RANGE** overrides `port_range` (*6801-6810*).
 
 ## Requirement
 
