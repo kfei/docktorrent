@@ -21,14 +21,7 @@ RUN build_deps="automake build-essential ca-certificates libc-ares-dev libcppuni
     cd .. && \
     rm -rf curl-* && \
     ldconfig && \
-    svn --trust-server-cert checkout https://svn.code.sf.net/p/xmlrpc-c/code/stable/ xmlrpc-c && \
-    cd xmlrpc-c && \
-    ./configure --enable-libxml2-backend --disable-abyss-server --disable-cgi-server && \
-    make && \
-    make install && \
-    cd .. && \
-    rm -rf xmlrpc-c && \
-    ldconfig && \
+    apt-get -y install libxmlrpc-core-c3 libxmlrpc-core-c3-dev && \
     wget -O libtorrent-$VER_LIBTORRENT.tar.gz https://github.com/rakshasa/libtorrent/archive/$VER_LIBTORRENT.tar.gz && \
     tar xzf libtorrent-$VER_LIBTORRENT.tar.gz && \
     cd libtorrent-$VER_LIBTORRENT && \
