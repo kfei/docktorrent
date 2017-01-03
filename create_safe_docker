@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# We should NEVER expose 80 port to the internet (unless its https)
+# We can open 127.0.0.1:80 from remote machine through ssh:
+#   ssh docktorrent_host -N -L 8000:127.0.0.1:80
+#   then open 127.0.0.1:8000 in your browser on remote machine
+# AUTH_OFF=all because we use ssh and http binded to 127.0.0.1
+
+docker run -idt \
+    -p 127.0.0.1:80:80 -p 45566:45566 -p 9527:9527/udp \
+    -e AUTH_OFF=all \
+    --dns 8.8.8.8 \
+    --name docktorrent \
+    -v /data-store:/rtorrent \
+    -e UPLOAD_RATE=1024 \
+    docktorrent
